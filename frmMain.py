@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created by: PyQt5 UI code generator 5.9.2
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_frmMain(object):
     def setupUi(self, frmMain):
@@ -15,8 +17,11 @@ class Ui_frmMain(object):
         self.centralwidget = QtWidgets.QWidget(frmMain)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(110, 80, 88, 34))
+        self.pushButton.setGeometry(QtCore.QRect(20, 60, 131, 51))
         self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(180, 60, 131, 51))
+        self.pushButton_2.setObjectName("pushButton_2")
         frmMain.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(frmMain)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 342, 30))
@@ -33,4 +38,4 @@ class Ui_frmMain(object):
         _translate = QtCore.QCoreApplication.translate
         frmMain.setWindowTitle(_translate("frmMain", "MainWindow"))
         self.pushButton.setText(_translate("frmMain", "Hello World 1"))
-
+        self.pushButton_2.setText(_translate("frmMain", "Hello World 2"))
