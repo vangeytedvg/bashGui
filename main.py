@@ -11,9 +11,7 @@ class MainForm(QtWidgets.QMainWindow, Ui_frmMain):
 
 if __name__ == '__main__':
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     main_form = MainForm()
     main_form.show()
     sys.exit(app.exec_())
-
