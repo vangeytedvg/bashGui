@@ -2,7 +2,7 @@
     guiCompiler.py
     Script that goes through a folder containing Qt Designer .ui files
     and .qrc files and compiles all occurences.
-    Author : DenkaTech Software
+    Author : DenkaTech Software (Danny Van Geyte)
     Created : 13/06/2021
 """
 import os
@@ -43,7 +43,7 @@ def compile_ui(prefix="frm_", location="."):
 
 def compile_resources(resourcename="images", location="."):
     """
-    Compile the .qrc files into .py files.
+    Compile the .qrc (Qt Designer resource files) into .py files.
     :param location: Path to file(s)
     :param resourcename: Name of the source resource file
     :return:
