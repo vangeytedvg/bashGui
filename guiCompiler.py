@@ -14,14 +14,14 @@ def compile_ui(prefix="frm_", location="."):
     Compile the .ui files to .py files.
     :param location: path to file
     :param prefix: Prefix for the form final name eg frmMain.py
-    :return: Tuple contains (count of file compiled without error,
+    :return: Tuple containing (count of file compiled without error,
                              count of files unable to compîle)
     """
     form_count_ok = 0
     form_count_ko = 0
 
     for ui_file in os.listdir(os.path.curdir):
-        # Loop through current directory
+        # Loop through directory
         if ui_file.endswith(".ui"):
             # We have a candidate file
             print(f"---> Found {ui_file}")
@@ -48,12 +48,38 @@ def compile_resources(resourcename="images", location="."):
     :param resourcename: Name of the source resource file
     :return:
     """
-    # echo "Compiling Resource file"
-    # pyrcc5 -o icons_rc.py ./ui/icons.qrc
+    res_count_ok = 0
+    res_count_ko = 0
+
+    for qrc_file in os.listdir(os.path.curdir):
+        # Loop through directory
+        if qrc_file.endswith(".qrc"):
+            # We have a candidate file
+            print(f"---> Found {qrc_file}")
+            # get the filename without extension
+            base_filename, _ = os.path.splitext(os.path.basename(qrc_file))
+            # Make the target name
+            target_filename = f"{base_filename}.py"
+            # Run!
+            result = subprocess.run(["pyrcc5", "-o", target_filename, f"{qrc_file}"], capture_output=True)
+            if result.returncode == 0:
+                print(f"[v] Resource compiled to {target_filename}")
+                res_count_ok += 1
+            else:
+                print(f"[e] An error occured {result}")
+                res_count_ko += 1
+
+    return res_count_ok, res_count_ko
 
 
 if __name__ == "__main__":
+    # Forms
     res_ok, res_ko = compile_ui("frm")
-    print("Compilation terminated!")
+    print("Form Compilation terminated!")
+    print(f"{res_ok} ui files converted without error")
+    print(f"{res_ko} ui files contain errors")
+    # Resources
+    res_ok, res_ko = compile_resources("images")
+    print("Form Compilation terminated!")
     print(f"{res_ok} ui files converted without error")
     print(f"{res_ko} ui files contain errors")
