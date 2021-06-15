@@ -9,7 +9,7 @@ import os
 import subprocess
 
 
-def compile_ui(prefix="frm_", location="."):
+def compile_ui(prefix="frm", location="."):
     """
     Compile the .ui files to .py files.
     :param location: path to file
@@ -20,7 +20,7 @@ def compile_ui(prefix="frm_", location="."):
     form_count_ok = 0
     form_count_ko = 0
 
-    for ui_file in os.listdir(os.path.curdir):
+    for ui_file in os.listdir(location):
         # Loop through directory
         if ui_file.endswith(".ui"):
             # We have a candidate file
@@ -30,7 +30,7 @@ def compile_ui(prefix="frm_", location="."):
             # Make the target name
             target_filename = f"{prefix}{str.capitalize(base_filename)}.py"
             # Run!
-            result = subprocess.run(["pyuic5", "-o", target_filename, f"{ui_file}"], capture_output=True)
+            result = subprocess.run(["pyuic5", "-o", target_filename, f"{location}/{ui_file}"], capture_output=True)
             if result.returncode == 0:
                 print(f"[v] Form compiled to {target_filename}")
                 form_count_ok += 1
@@ -41,7 +41,7 @@ def compile_ui(prefix="frm_", location="."):
     return form_count_ok, form_count_ko
 
 
-def compile_resources(resourcename="images", location="."):
+def compile_resources(location="."):
     """
     Compile the .qrc (Qt Designer resource files) into .py files.
     :param location: Path to file(s)
@@ -51,7 +51,7 @@ def compile_resources(resourcename="images", location="."):
     res_count_ok = 0
     res_count_ko = 0
 
-    for qrc_file in os.listdir(os.path.curdir):
+    for qrc_file in os.listdir(location):
         # Loop through directory
         if qrc_file.endswith(".qrc"):
             # We have a candidate file
@@ -61,7 +61,7 @@ def compile_resources(resourcename="images", location="."):
             # Make the target name
             target_filename = f"{base_filename}.py"
             # Run!
-            result = subprocess.run(["pyrcc5", "-o", target_filename, f"{qrc_file}"], capture_output=True)
+            result = subprocess.run(["pyrcc5", "-o", target_filename, f"{location}/{qrc_file}"], capture_output=True)
             if result.returncode == 0:
                 print(f"[v] Resource compiled to {target_filename}")
                 res_count_ok += 1
@@ -74,12 +74,12 @@ def compile_resources(resourcename="images", location="."):
 
 if __name__ == "__main__":
     # Forms
-    res_ok, res_ko = compile_ui("frm")
+    res_ok, res_ko = compile_ui(prefix="frm", location=".")
     print("Form Compilation terminated!")
     print(f"{res_ok} ui files converted without error")
     print(f"{res_ko} ui files contain errors")
     # Resources
-    res_ok, res_ko = compile_resources("images")
+    res_ok, res_ko = compile_resources(location=".")
     print("Form Compilation terminated!")
-    print(f"{res_ok} ui files converted without error")
-    print(f"{res_ko} ui files contain errors")
+    print(f"{res_ok} resource file(s) converted without error")
+    print(f"{res_ko} resource file(s) contain errors")
