@@ -73,6 +73,10 @@ def compile_resources(location="."):
 
 
 if __name__ == "__main__":
+    """
+    We keep the compilation of the .ui and .qrc files separate. They could be 
+    merged, but having them appart allows more scalability.
+    """
     # Forms
     res_ok, res_ko = compile_ui(prefix="frm", location=".")
     print("Form Compilation terminated!")
