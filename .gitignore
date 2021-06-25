@@ -1,2 +1,3 @@
 # Project exclude paths
 /venv/
+/__pycache__/frmMain.cpython-39.pyc
