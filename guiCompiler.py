@@ -24,7 +24,7 @@ def compile_ui(prefix="frm", location="."):
         # Loop through directory
         if ui_file.endswith(".ui"):
             # We have a candidate file
-            print(f"---> Found {ui_file}")
+            print(f"--> Found {ui_file}")
             # get the filename without extension
             base_filename, _ = os.path.splitext(os.path.basename(ui_file))
             # Make the target name
@@ -45,8 +45,8 @@ def compile_resources(location="."):
     """
     Compile the .qrc (Qt Designer resource files) into .py files.
     :param location: Path to file(s)
-    :param resourcename: Name of the source resource file
-    :return:
+    :return: Tuple containing (count of file compiled without error,
+                             count of files unable to compîle)
     """
     res_count_ok = 0
     res_count_ko = 0
@@ -55,7 +55,7 @@ def compile_resources(location="."):
         # Loop through directory
         if qrc_file.endswith(".qrc"):
             # We have a candidate file
-            print(f"---> Found {qrc_file}")
+            print(f"--> Found {qrc_file}")
             # get the filename without extension
             base_filename, _ = os.path.splitext(os.path.basename(qrc_file))
             # Make the target name
@@ -77,12 +77,12 @@ if __name__ == "__main__":
     We keep the compilation of the .ui and .qrc files separate. They could be 
     merged, but having them appart allows more scalability.
     """
-    # Forms
+    # Forms (.ui)
     res_ok, res_ko = compile_ui(prefix="frm", location=".")
     print("Form Compilation terminated!")
     print(f"{res_ok} ui files converted without error")
     print(f"{res_ko} ui files contain errors")
-    # Resources
+    # Resources (.qrc)
     res_ok, res_ko = compile_resources(location=".")
     print("Resource Compilation terminated!")
     print(f"{res_ok} resource file(s) converted without error")
