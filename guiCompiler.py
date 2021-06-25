@@ -84,6 +84,6 @@ if __name__ == "__main__":
     print(f"{res_ko} ui files contain errors")
     # Resources
     res_ok, res_ko = compile_resources(location=".")
-    print("Form Compilation terminated!")
+    print("Resource Compilation terminated!")
     print(f"{res_ok} resource file(s) converted without error")
     print(f"{res_ko} resource file(s) contain errors")
